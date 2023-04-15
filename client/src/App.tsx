@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 
-
 type TDeck = {
   title: string
   _id: string
@@ -12,7 +11,7 @@ function App() {
 
   const handleCreateDeck = async (e: React.FormEvent) => {
     e.preventDefault()
-    await fetch('http://localhost:3000/decks', {
+    const response = await fetch('http://localhost:3000/decks', {
       method: 'POST',
       body: JSON.stringify({
         title,
@@ -21,7 +20,19 @@ function App() {
         "Content-Type": "application/json"
       }
     })
+    const deck = await response.json()
+    setDecks([...decks, deck])
     setTitle('')
+  }
+
+  const handleDeleteDeck = async (deckId: string) => {
+
+    await fetch(`http://localhost:3000/decks/${deckId}`, {
+      method: "DELETE"
+    })
+    // refetch all the decks (not optimal)
+    // only delete the current deckId object
+    setDecks(decks.filter((deck) => deck._id != deckId))
   }
 
   useEffect(() => {
@@ -36,7 +47,8 @@ function App() {
   return (
     <div className="App">
       <ul className='decks'>
-        {decks.map((deck) => <li key={deck._id}>{deck.title}</li>)}
+        {decks.map((deck) => <li key={deck._id}>{deck.title}
+          <button onClick={() => handleDeleteDeck(deck._id)}>X</button></li>)}
       </ul>
       <form onSubmit={handleCreateDeck}>
         <label htmlFor="">Deck Title</label>
