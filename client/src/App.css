@@ -18,6 +18,7 @@
   grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
   color: black;
+
 }
 
 
@@ -26,6 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
   height: 120px;
   background: white;
   border: 1px solid white;
@@ -33,7 +35,11 @@
 
 .decks li button {
   position: absolute;
-  font-size: 12px;
+  font-size: 10px;
   top: 5px;
   right: 5px;
+}
+
+.appForm input {
+  margin: 8px;
 }
