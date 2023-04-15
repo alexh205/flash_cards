@@ -5,18 +5,35 @@
   text-align: center;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .decks {
   display: grid;
   width: 600px;
   margin: 2 auto;
   grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
+  color: black;
 }
 
 
 .decks li {
-  display: block;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 120px;
   background: white;
   border: 1px solid white;
+}
+
+.decks li button {
+  position: absolute;
+  font-size: 12px;
+  top: 5px;
+  right: 5px;
 }
