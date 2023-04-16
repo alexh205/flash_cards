@@ -7,6 +7,8 @@ import { getDecksController } from './Controllers/getDecksController';
 import { createDecksController } from './Controllers/createDecksController';
 import { deleteDecksController } from './Controllers/deleteDecksController';
 import { createCardDeckController } from './Controllers/createCardDeckController';
+import { getDeckController } from './Controllers/getDeckController';
+import { deleteCardDeckController } from './Controllers/deleteCardDeckController';
 
 
 // Defining the server Port #
@@ -21,12 +23,13 @@ app.use(cors({
 app.use(express.json())
 
 app.get('/decks', getDecksController)
+app.get('/decks/:deckId', getDeckController)
 
 app.post('/decks', createDecksController);
 app.post('/decks/:deckId/cards', createCardDeckController);
 
 app.delete('/decks/:deckId', deleteDecksController)
-
+app.delete('/decks/:deckId/cards/:index', deleteCardDeckController)
 // connecting to the mongoose db
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
